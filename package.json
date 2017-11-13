@@ -1,0 +1,18 @@
+{
+    "name": "sdkbar-mytarget",
+    "version": "0.0.1",
+    "description": "Plugin for MyTarget advertize network",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/DrMoriarty/sdkbar-mytarget"
+    },
+    "keywords": [
+        "cocos2d-x",
+        "plugin",
+        "sdkbox",
+        "mytarget",
+        "ecosystem:cocos2d-x"
+    ],
+    "author": "DrMoriarty",
+    "license": "MIT License"
+}

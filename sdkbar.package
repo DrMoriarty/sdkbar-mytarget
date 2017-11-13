@@ -1,0 +1,17 @@
+
+sdkbox.copy_files(['app'], PLUGIN_PATH, ANDROID_STUDIO_PROJECT_DIR)
+
+sdkbox.copy_files(['cpp/MyTarget.h', 'cpp/MyTarget.cpp'], PLUGIN_PATH, COCOS_CLASSES_DIR)
+
+#sdkbox.android_add_sources(['../../Classes/utils/PluginUtils.cpp'])
+
+sdkbox.android_set_permissions(['INTERNET', 'ACCESS_NETWORK_STATE'])
+sdkbox.android_copy_jars(['mytarget-sdk-4.5.1.jar'])
+
+sdkbox.android_add_xml_item({
+  'path': 'application',
+  'tag': 'activity',
+  'key': 'com.my.target.ads.MyTargetActivity',
+  'xml': '<activity android:name="com.my.target.ads.MyTargetActivity" android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"></activity>'
+})
+
