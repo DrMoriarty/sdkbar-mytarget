@@ -15,3 +15,12 @@ sdkbox.android_add_xml_item({
   'xml': '<activity android:name="com.my.target.ads.MyTargetActivity" android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"></activity>'
 })
 
+sdkbar.appDelegateInject({
+    'marker': SDKBOX_PACKAGE_NAME,
+    'android': {
+         'include': 'MyTarget.h',
+         'function': 'register_all_mytarget_framework'
+    }
+})
+sdkbox.android_add_sources(['../../Classes/MyTarget.cpp'])
+
