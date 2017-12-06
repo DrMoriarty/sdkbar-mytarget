@@ -6,7 +6,7 @@ sdkbox.copy_files(['cpp/MyTarget.h', 'cpp/MyTarget.cpp'], PLUGIN_PATH, COCOS_CLA
 #sdkbox.android_add_sources(['../../Classes/utils/PluginUtils.cpp'])
 
 sdkbox.android_set_permissions(['INTERNET', 'ACCESS_NETWORK_STATE'])
-sdkbox.android_copy_jars(['mytarget-sdk-4.5.1.jar'])
+sdkbox.android_copy_jars(['mytarget-sdk-4.6.28.jar'])
 
 sdkbox.android_add_xml_item({
   'path': 'application',
