@@ -21,6 +21,7 @@ public class MyTargetPlugin {
     private static InterstitialAd fullscreenAd = null;
     public static Activity appActivity;
     private static boolean inited = false;
+    private static boolean completed = false;
 
     static private void callCallbackResult(final int callbackId, final String error, final String result) {
         appActivity.runOnUiThread(new Runnable() {
@@ -33,7 +34,7 @@ public class MyTargetPlugin {
 
     public static native void callbackResult(int callbackId, String err, String result);
 
-	public static boolean init() {
+    public static boolean init() {
         if(!inited) {
             appActivity = Cocos2dxHelper.getActivity();
             Log.i(TAG, "MyTarget initialize");
@@ -218,40 +219,46 @@ public class MyTargetPlugin {
             Log.e(TAG, "Have no fullscreenAd to show");
             callCallbackResult(callbackId, "You should call loadFullScreen before showFullScreen", null);
             return false;
-        } 
+        }
+        completed = false;
         fullscreenAd.setListener(new InterstitialAd.InterstitialAdListener() {
-                @Override
-                public void onLoad(InterstitialAd ad) {
-                    Log.e(TAG, "Fullscreen ad was loaded twice.");
-                }
+            @Override
+            public void onLoad(InterstitialAd ad) {
+                Log.e(TAG, "Fullscreen ad was loaded twice.");
+            }
 
-                @Override
-                public void onNoAd(String reason, InterstitialAd ad) {
-                    Log.e(TAG, "No available ad for loaded fullscreen Ad");
-                    callCallbackResult(callbackId, "No ads for loaded fullscreen Ad ", null);
-                }
+            @Override
+            public void onNoAd(String reason, InterstitialAd ad) {
+                Log.e(TAG, "No available ad for loaded fullscreen Ad");
+                callCallbackResult(callbackId, "No ads for loaded fullscreen Ad ", null);
+            }
 
-                @Override
-                public void onClick(InterstitialAd ad) {
-                    Log.i(TAG, "Click on fullscreen ad");
-                }
+            @Override
+            public void onClick(InterstitialAd ad) {
+                Log.i(TAG, "Click on fullscreen ad");
+            }
 
-                @Override
-                public void onDisplay(InterstitialAd ad) {
-                    Log.i(TAG, "Display fullscreen ad");
-                }
+            @Override
+            public void onDisplay(InterstitialAd ad) {
+                Log.i(TAG, "Display fullscreen ad");
+            }
 
-                @Override
-                public void onDismiss(InterstitialAd ad) {
-                    Log.i(TAG, "Fullscreen ad dismiss");
-                    callCallbackResult(callbackId, null, "Fullscreen ad closed");
+            @Override
+            public void onDismiss(InterstitialAd ad) {
+                Log.i(TAG, "Fullscreen ad dismiss");
+                if (completed) {
+                    callCallbackResult(callbackId, null, "Fullscreen ad completed");
+                } else {
+                    callCallbackResult(callbackId, "Fullscreen ad closed", null);
                 }
+            }
 
-                @Override
-                public void onVideoCompleted(InterstitialAd ad) {
-                    Log.i(TAG, "Fullscreen video completed");
-                }
-            });
+            @Override
+            public void onVideoCompleted(InterstitialAd ad) {
+                completed = true;
+                Log.i(TAG, "Fullscreen video completed");
+            }
+        });
         fullscreenAd.show();
         return true;
     }

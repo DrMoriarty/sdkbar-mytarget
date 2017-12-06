@@ -63,8 +63,9 @@ static bool jsb_mytarget_init(JSContext *cx, uint32_t argc, jsval *vp)
     js_proxy_t *proxy = jsb_get_js_proxy(obj);
     CCLOG("init, param count:%d.\n", argc);
     JS::CallReceiver rec = JS::CallReceiverFromVp(vp);
+    bool ok = true;
     if(argc == 0) {
-        if(pluginMethod0("init")) {
+        if (pluginMethod0("init")) {
             rec.rval().set(JSVAL_TRUE);
         } else {
             rec.rval().set(JSVAL_FALSE);
@@ -88,10 +89,11 @@ static bool jsb_mytarget_loadBanner(JSContext *cx, uint32_t argc, jsval *vp)
     if(argc == 3) {
         // param, callback, this
         CallbackFrame *loginCallback = new CallbackFrame(cx, obj, args.get(2), args.get(1));
-        JS::RootedValue arg0Val(cx, args.get(0));
-        int32_t arg0 = 0;
-        ok &= jsval_to_int32(cx, arg0Val, &arg0);
-        if(pluginMethod2("loadBanner", arg0, loginCallback->callbackId)) {
+
+        int arg0 = 0;
+        ok &= jsval_to_int32(cx, args.get(0), (int32_t *) & arg0);
+
+        if (pluginMethod2("loadBanner", arg0, loginCallback->callbackId)) {
             rec.rval().set(JSVAL_TRUE);
         } else {
             rec.rval().set(JSVAL_FALSE);
@@ -133,7 +135,9 @@ static bool jsb_mytarget_removeBanner(JSContext *cx, uint32_t argc, jsval *vp)
     JS::CallReceiver rec = JS::CallReceiverFromVp(vp);
     if(argc == 2) {
         CallbackFrame *cb = new CallbackFrame(cx, obj, args.get(1), args.get(0));
-        if(pluginMethod1("removeBanner", cb->callbackId)) {
+
+
+        if (pluginMethod1("removeBanner", cb->callbackId)) {
             rec.rval().set(JSVAL_TRUE);
         } else {
             rec.rval().set(JSVAL_FALSE);
@@ -155,10 +159,10 @@ static bool jsb_mytarget_loadFullScreen(JSContext *cx, uint32_t argc, jsval *vp)
     if(argc == 3) {
         // params, callback function & this
         CallbackFrame *cb = new CallbackFrame(cx, obj, args.get(2), args.get(1));
-        JS::RootedValue arg0Val(cx, args.get(0));
-        int32_t arg0 = 0;
-        ok &= jsval_to_int32(cx, arg0Val, &arg0);
-        if(pluginMethod2("loadFullScreen", arg0, cb->callbackId)) {
+        int arg0 = 0;
+        ok &= jsval_to_int32(cx, args.get(0), (int32_t *) & arg0);
+
+        if (pluginMethod2("loadFullScreen", arg0, cb->callbackId)) {
             rec.rval().set(JSVAL_TRUE);
         } else {
             rec.rval().set(JSVAL_FALSE);
