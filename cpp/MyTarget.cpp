@@ -43,6 +43,17 @@ static bool pluginMethod1(const char* method, int param) {
     return true;
 }
 
+static bool pluginMethod1(const char* method, bool param) {
+    cocos2d::JniMethodInfo methodInfo;
+
+    if (! cocos2d::JniHelper::getStaticMethodInfo(methodInfo, "org/cocos2dx/javascript/MyTargetPlugin", method, "(Z)Z")) {
+        return false;
+    }
+    bool res = methodInfo.env->CallStaticBooleanMethod(methodInfo.classID, methodInfo.methodID, param);
+    methodInfo.env->DeleteLocalRef(methodInfo.classID);
+    return true;
+}
+
 static bool pluginMethod2(const char* method, int param, int callbackId) {
     cocos2d::JniMethodInfo methodInfo;
 
@@ -195,6 +206,52 @@ static bool jsb_mytarget_showFullScreen(JSContext *cx, uint32_t argc, jsval *vp)
     }
 }
 
+static bool jsb_mytarget_setUserConsent(JSContext *cx, uint32_t argc, jsval *vp)
+{
+    printLog("jsb_mytarget_setUserConsent");
+    JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
+    JS::RootedObject obj(cx, args.thisv().toObjectOrNull());
+    JS::CallReceiver rec = JS::CallReceiverFromVp(vp);
+    if(argc == 1) {
+        // callback, this
+        bool arg0 = false;
+        //ok &= jsval_to_bool(cx, args.get(0), (bool *) &arg0);
+        
+        if(pluginMethod1("setUserConsent", JS::ToBoolean(args.get(0)))) {
+            rec.rval().set(JSVAL_TRUE);
+        } else {
+            rec.rval().set(JSVAL_FALSE);
+        }
+        return true;
+    } else {
+        JS_ReportError(cx, "Invalid number of arguments");
+        return false;
+    }
+}
+
+static bool jsb_mytarget_setUserAgeRestricted(JSContext *cx, uint32_t argc, jsval *vp)
+{
+    printLog("jsb_mytarget_setUserAgeRestricted");
+    JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
+    JS::RootedObject obj(cx, args.thisv().toObjectOrNull());
+    JS::CallReceiver rec = JS::CallReceiverFromVp(vp);
+    if(argc == 1) {
+        // callback, this
+        bool arg0 = false;
+        //ok &= jsval_to_bool(cx, args.get(0), (bool *) &arg0);
+        
+        if(pluginMethod1("setUserAgeRestricted", JS::ToBoolean(args.get(0)))) {
+            rec.rval().set(JSVAL_TRUE);
+        } else {
+            rec.rval().set(JSVAL_FALSE);
+        }
+        return true;
+    } else {
+        JS_ReportError(cx, "Invalid number of arguments");
+        return false;
+    }
+}
+
 void register_all_mytarget_framework(JSContext* cx, JS::HandleObject obj)
 {
     printLog("register_all_mytarget_framework");
@@ -207,6 +264,8 @@ void register_all_mytarget_framework(JSContext* cx, JS::HandleObject obj)
     JS_DefineFunction(cx, ns, "removeBanner", jsb_mytarget_removeBanner, 2, JSPROP_ENUMERATE | JSPROP_PERMANENT);
     JS_DefineFunction(cx, ns, "loadFullScreen", jsb_mytarget_loadFullScreen, 3, JSPROP_ENUMERATE | JSPROP_PERMANENT);
     JS_DefineFunction(cx, ns, "showFullScreen", jsb_mytarget_showFullScreen, 2, JSPROP_ENUMERATE | JSPROP_PERMANENT);
+    JS_DefineFunction(cx, ns, "setUserConsent", jsb_mytarget_setUserConsent, 1, JSPROP_ENUMERATE | JSPROP_PERMANENT);
+    JS_DefineFunction(cx, ns, "serUserAgeRestricted", jsb_mytarget_setUserAgeRestricted, 1, JSPROP_ENUMERATE | JSPROP_PERMANENT);
 
 }
 

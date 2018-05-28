@@ -12,6 +12,7 @@ import org.json.JSONObject;
 
 import com.my.target.ads.MyTargetView;
 import com.my.target.ads.InterstitialAd;
+import com.my.target.common.MyTargetPrivacy;
 import org.cocos2dx.lib.Cocos2dxHelper;
 
 public class MyTargetPlugin {
@@ -260,6 +261,16 @@ public class MyTargetPlugin {
             }
         });
         fullscreenAd.show();
+        return true;
+    }
+
+    public static boolean setUserConsent(boolean consent) {
+        MyTargetPrivacy.setUserConsent(consent);
+        return true;
+    }
+
+    public static boolean setUserAgeRestricted(boolean restricted) {
+        MyTargetPrivacy.setUserAgeRestricted(restricted);
         return true;
     }
 };
