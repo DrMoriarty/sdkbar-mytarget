@@ -1,6 +1,6 @@
 //
 //  MTRGInstreamAd.h
-//  myTargetSDK 4.7.11
+//  myTargetSDK 4.8.9
 //
 //  Created by Anton Bulankin on 31.08.16.
 //  Copyright © 2016 Mail.ru. All rights reserved.
@@ -59,7 +59,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic) NSUInteger videoQuality;
 @property(nonatomic, nullable) id <MTRGInstreamAdPlayer> player;
 @property(nonatomic) BOOL fullscreen;
-@property(nonatomic) BOOL trackEnvironmentEnabled;
 @property(nonatomic) BOOL trackLocationEnabled;
 @property(nonatomic) float volume;
 @property(nonatomic) NSUInteger loadingTimeout;

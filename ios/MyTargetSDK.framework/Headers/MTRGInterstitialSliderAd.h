@@ -1,6 +1,6 @@
 //
 //  MTRGInterstitialSliderAd.h
-//  myTargetSDK 4.7.11
+//  myTargetSDK 4.8.9
 //
 //  Created by Andrey Seredkin on 10.11.16.
 //  Copyright © 2016 Mail.ru Group. All rights reserved.
@@ -36,7 +36,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property(nonatomic, weak, nullable) id <MTRGInterstitialSliderAdDelegate> delegate;
 @property(nonatomic, readonly, nullable) MTRGCustomParams *customParams;
-@property(nonatomic) BOOL trackEnvironmentEnabled;
 @property(nonatomic) BOOL trackLocationEnabled;
 
 + (void)setDebugMode:(BOOL)enabled;

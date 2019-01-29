@@ -1,6 +1,6 @@
 //
 //  MTRGInstreamAudioAd.h
-//  myTargetSDK 4.7.11
+//  myTargetSDK 4.8.9
 //
 //  Created by Andrey Seredkin on 20.12.16.
 //  Copyright © 2016 Mail.ru Group. All rights reserved.
@@ -58,7 +58,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, weak, nullable) id <MTRGInstreamAudioAdDelegate> delegate;
 @property(nonatomic, readonly, nullable) MTRGCustomParams *customParams;
 @property(nonatomic, nullable) id <MTRGInstreamAudioAdPlayer> player;
-@property(nonatomic) BOOL trackEnvironmentEnabled;
 @property(nonatomic) BOOL trackLocationEnabled;
 @property(nonatomic) float volume;
 @property(nonatomic) NSUInteger loadingTimeout;

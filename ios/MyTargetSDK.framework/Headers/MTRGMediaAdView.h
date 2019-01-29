@@ -1,6 +1,6 @@
 //
 //  MTRGMediaAdView.h
-//  myTargetSDK 4.7.11
+//  myTargetSDK 4.8.9
 //
 //  Created by Andrey Seredkin on 19.08.16.
 //  Copyright © 2016 Mail.ru. All rights reserved.

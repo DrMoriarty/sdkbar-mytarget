@@ -1,5 +1,6 @@
 
 sdkbox.copy_files(['app'], PLUGIN_PATH, ANDROID_STUDIO_PROJECT_DIR)
+sdkbox.copy_files(['ios/MyTargetSDK.framework'], PLUGIN_PATH, IOS_PROJECT_DIR)
 
 sdkbox.copy_files(['cpp/MyTarget.h', 'cpp/MyTarget.cpp'], PLUGIN_PATH, COCOS_CLASSES_DIR)
 
@@ -8,6 +9,8 @@ sdkbox.copy_files(['cpp/MyTarget.h', 'cpp/MyTarget.cpp'], PLUGIN_PATH, COCOS_CLA
 sdkbox.android_set_permissions(['INTERNET', 'ACCESS_NETWORK_STATE'])
 sdkbar.gradle_dependencies(["compile 'com.my.target:mytarget-sdk:5.1.+'"])
 sdkbar.gradle_dependencies(["compile 'com.google.ads.mediation:mytarget:5.1.+'"])
+
+sdkbox.xcode_add_frameworks(['MyTargetSDK.framework', 'CoreLocation.framework'])
 
 sdkbox.android_add_xml_item({
   'path': 'application',

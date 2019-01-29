@@ -15,9 +15,9 @@ NS_ASSUME_NONNULL_BEGIN
 @interface MTRGNativeAdLoader : NSObject
 
 @property(nonatomic, readonly, nullable) MTRGCustomParams *customParams;
+@property(nonatomic) MTRGAdChoicesPlacement adChoicesPlacement;
 @property(nonatomic) BOOL autoLoadImages;
 @property(nonatomic) BOOL autoLoadVideo;
-@property(nonatomic) BOOL trackEnvironmentEnabled;
 @property(nonatomic) BOOL trackLocationEnabled;
 
 + (instancetype)loaderForCount:(NSUInteger)count slotId:(NSUInteger)slotId;

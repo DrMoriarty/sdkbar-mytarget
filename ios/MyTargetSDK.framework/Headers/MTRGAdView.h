@@ -1,6 +1,6 @@
 //
 //  MTRGAdView.h
-//  myTargetSDK 4.7.11
+//  myTargetSDK 4.8.9
 //
 //  Created by Anton Bulankin on 05.03.15.
 //  Copyright (c) 2015 Mail.ru Group. All rights reserved.
@@ -43,7 +43,6 @@ typedef enum : NSUInteger
 @property(nonatomic, weak, nullable) id <MTRGAdViewDelegate> delegate;
 @property(nonatomic, readonly, nullable) MTRGCustomParams *customParams;
 @property(nonatomic, weak, nullable) UIViewController *viewController;
-@property(nonatomic) BOOL trackEnvironmentEnabled;
 @property(nonatomic) BOOL trackLocationEnabled;
 
 + (void)setDebugMode:(BOOL)enabled;
@@ -57,6 +56,8 @@ typedef enum : NSUInteger
 - (nullable instancetype)initWithSlotId:(NSUInteger)slotId withRefreshAd:(BOOL)refreshAd adSize:(MTRGAdSize)adSize;
 
 - (void)load;
+
+- (void)loadFromBid:(NSString *)bidId;
 
 - (void)start;
 

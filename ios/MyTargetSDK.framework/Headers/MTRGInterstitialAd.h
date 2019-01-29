@@ -1,6 +1,6 @@
 //
 //  InterstitialAd.h
-//  myTargetSDK 4.7.11
+//  myTargetSDK 4.8.9
 //
 //  Created by Anton Bulankin on 04.02.15.
 //  Copyright (c) 2015 Mail.ru Group. All rights reserved.
@@ -39,7 +39,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property(nonatomic, weak, nullable) id <MTRGInterstitialAdDelegate> delegate;
 @property(nonatomic, readonly, nullable) MTRGCustomParams *customParams;
-@property(nonatomic) BOOL trackEnvironmentEnabled;
 @property(nonatomic) BOOL trackLocationEnabled;
 
 + (void)setDebugMode:(BOOL)enabled;
@@ -49,6 +48,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (nullable instancetype)initWithSlotId:(NSUInteger)slotId;
 
 - (void)load;
+
+- (void)loadFromBid:(NSString *)bidId;
 
 - (void)showWithController:(UIViewController *)controller;
 

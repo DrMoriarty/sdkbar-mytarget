@@ -1,6 +1,6 @@
 //
 //  MTRGChatListAdView.h
-//  myTargetSDK 4.7.11
+//  myTargetSDK 4.8.9
 //
 //  Created by Anton Bulankin on 05.12.14.
 //  Copyright (c) 2014 Mail.ru Group. All rights reserved.

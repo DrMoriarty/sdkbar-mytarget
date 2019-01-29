@@ -1,12 +1,20 @@
 //
 //  MTRGNativeAd.h
-//  myTargetSDK 4.7.11
+//  myTargetSDK 4.8.9
 //
 //  Created by Anton Bulankin on 10.11.14.
 //  Copyright (c) 2014 Mail.ru Group. All rights reserved.
 //
 
 #import <MyTargetSDK/MTRGNativePromoBanner.h>
+
+typedef enum : NSUInteger
+{
+	MTRGAdChoicesPlacementTopLeft,
+	MTRGAdChoicesPlacementTopRight,
+	MTRGAdChoicesPlacementBottomLeft,
+	MTRGAdChoicesPlacementBottomRight
+} MTRGAdChoicesPlacement;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -44,9 +52,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, weak, nullable) id <MTRGNativeAdDelegate> delegate;
 @property(nonatomic, readonly, nullable) MTRGNativePromoBanner *banner;
 @property(nonatomic, readonly, nullable) MTRGCustomParams *customParams;
+@property(nonatomic) MTRGAdChoicesPlacement adChoicesPlacement;
 @property(nonatomic) BOOL autoLoadImages;
 @property(nonatomic) BOOL autoLoadVideo;
-@property(nonatomic) BOOL trackEnvironmentEnabled;
 @property(nonatomic) BOOL trackLocationEnabled;
 
 + (void)setDebugMode:(BOOL)enabled;
@@ -58,6 +66,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (nullable instancetype)initWithSlotId:(NSUInteger)slotId;
 
 - (void)load;
+
+- (void)loadFromBid:(NSString *)bidId;
 
 - (void)registerView:(UIView *)containerView withController:(UIViewController *)controller;
 
