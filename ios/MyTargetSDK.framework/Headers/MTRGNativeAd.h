@@ -1,12 +1,16 @@
 //
-//  MTRGNativeAd.h
-//  myTargetSDK 4.8.9
+//  myTargetSDK 5.0.4
 //
-//  Created by Anton Bulankin on 10.11.14.
-//  Copyright (c) 2014 Mail.ru Group. All rights reserved.
+// Created by Timur on 2/1/18.
+// Copyright (c) 2018 Mail.Ru Group. All rights reserved.
 //
 
-#import <MyTargetSDK/MTRGNativePromoBanner.h>
+#import <UIKit/UIKit.h>
+#import "MTRGBaseAd.h"
+
+@class MTRGNativeAd;
+@class MTRGNativePromoBanner;
+@class MTRGImageData;
 
 typedef enum : NSUInteger
 {
@@ -17,9 +21,6 @@ typedef enum : NSUInteger
 } MTRGAdChoicesPlacement;
 
 NS_ASSUME_NONNULL_BEGIN
-
-@class MTRGNativeAd;
-@class MTRGCustomParams;
 
 @protocol MTRGNativeAdDelegate <NSObject>
 
@@ -47,23 +48,21 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-@interface MTRGNativeAd : NSObject
+@interface MTRGNativeAd : MTRGBaseAd
 
-@property(nonatomic, weak, nullable) id <MTRGNativeAdDelegate> delegate;
-@property(nonatomic, readonly, nullable) MTRGNativePromoBanner *banner;
-@property(nonatomic, readonly, nullable) MTRGCustomParams *customParams;
-@property(nonatomic) MTRGAdChoicesPlacement adChoicesPlacement;
 @property(nonatomic) BOOL autoLoadImages;
 @property(nonatomic) BOOL autoLoadVideo;
-@property(nonatomic) BOOL trackLocationEnabled;
-
-+ (void)setDebugMode:(BOOL)enabled;
-
-+ (BOOL)isDebugMode;
+@property(nonatomic) MTRGAdChoicesPlacement adChoicesPlacement;
+@property(nonatomic, weak, nullable) id <MTRGNativeAdDelegate> delegate;
+@property(nonatomic, readonly, nullable) MTRGNativePromoBanner *banner;
 
 + (void)loadImage:(MTRGImageData *)imageData toView:(UIImageView *)imageView;
 
-- (nullable instancetype)initWithSlotId:(NSUInteger)slotId;
++ (instancetype)nativeAdWithSlotId:(NSUInteger)slotId;
+
+- (instancetype)init NS_UNAVAILABLE;
+
+- (instancetype)initWithSlotId:(NSUInteger)slotId;
 
 - (void)load;
 

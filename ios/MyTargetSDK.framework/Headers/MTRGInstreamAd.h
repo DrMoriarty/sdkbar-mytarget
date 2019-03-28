@@ -1,28 +1,28 @@
 //
-//  MTRGInstreamAd.h
-//  myTargetSDK 4.8.9
+//  myTargetSDK 5.0.4
 //
-//  Created by Anton Bulankin on 31.08.16.
-//  Copyright © 2016 Mail.ru. All rights reserved.
+// Created by Timur on 5/4/18.
+// Copyright (c) 2018 Mail.Ru Group. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
-#import <MyTargetSDK/MTRGInstreamAdPlayer.h>
+#import "MTRGBaseAd.h"
+
+@protocol MTRGInstreamAdPlayer;
+@class MTRGInstreamAd;
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class MTRGCustomParams;
-@class MTRGInstreamAd;
-@class UIViewController;
-
 @interface MTRGInstreamAdBanner : NSObject
 
-@property(nonatomic) NSTimeInterval duration;
-@property(nonatomic) BOOL allowPause;
-@property(nonatomic) BOOL allowClose;
-@property(nonatomic) NSTimeInterval allowCloseDelay;
-@property(nonatomic) CGSize size;
-@property(nonatomic, copy, nullable) NSString *ctaText;
+@property(nonatomic, readonly) NSTimeInterval duration;
+@property(nonatomic, readonly) BOOL allowPause;
+@property(nonatomic, readonly) BOOL allowClose;
+@property(nonatomic, readonly) NSTimeInterval allowCloseDelay;
+@property(nonatomic, readonly) CGSize size;
+@property(nonatomic, readonly, copy, nullable) NSString *ctaText;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 @end
 
@@ -52,22 +52,21 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-@interface MTRGInstreamAd : NSObject
+@interface MTRGInstreamAd : MTRGBaseAd
 
 @property(nonatomic, weak, nullable) id <MTRGInstreamAdDelegate> delegate;
-@property(nonatomic, readonly, nullable) MTRGCustomParams *customParams;
-@property(nonatomic) NSUInteger videoQuality;
 @property(nonatomic, nullable) id <MTRGInstreamAdPlayer> player;
-@property(nonatomic) BOOL fullscreen;
-@property(nonatomic) BOOL trackLocationEnabled;
-@property(nonatomic) float volume;
+@property(nonatomic, readonly, copy) NSArray<NSNumber *> *midpoints;
+@property(nonatomic) NSUInteger videoQuality;
 @property(nonatomic) NSUInteger loadingTimeout;
+@property(nonatomic) BOOL fullscreen;
+@property(nonatomic) float volume;
 
-+ (void)setDebugMode:(BOOL)enabled;
++ (instancetype)instreamAdWithSlotId:(NSUInteger)slotId;
 
-+ (BOOL)isDebugMode;
+- (instancetype)init NS_UNAVAILABLE;
 
-- (nullable instancetype)initWithSlotId:(NSUInteger)slotId;
+- (instancetype)initWithSlotId:(NSUInteger)slotId;
 
 - (void)load;
 
@@ -93,13 +92,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)useDefaultPlayer;
 
-- (void)configureMidpointsP:(NSArray<NSNumber *> *)midpointsP forVideoDuration:(NSTimeInterval)videoDuration;
+- (void)configureMidpointsP:(nullable NSArray<NSNumber *> *)midpointsP forVideoDuration:(NSTimeInterval)videoDuration;
 
-- (void)configureMidpoints:(NSArray<NSNumber *> *)midpoints forVideoDuration:(NSTimeInterval)videoDuration;
+- (void)configureMidpoints:(nullable NSArray<NSNumber *> *)midpoints forVideoDuration:(NSTimeInterval)videoDuration;
 
 - (void)configureMidpointsForVideoDuration:(NSTimeInterval)videoDuration;
-
-- (NSArray<NSNumber *> *)midpoints;
 
 @end
 

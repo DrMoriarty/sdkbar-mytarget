@@ -1,9 +1,8 @@
 //
-//  MTRGInstreamAudioAdPlayer.h
-//  myTargetSDK 4.8.9
+//  myTargetSDK 5.0.4
 //
-//  Created by Andrey Seredkin on 20.12.16.
-//  Copyright © 2016 Mail.ru Group. All rights reserved.
+// Created by Timur on 5/25/18.
+// Copyright (c) 2018 Mail.Ru Group. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>

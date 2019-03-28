@@ -1,12 +1,14 @@
 //
 //  MTRGInstreamAdPlayer.h
-//  myTarget
+//  myTargetSDK 5.0.4
 //
 //  Created by Anton Bulankin on 21.09.16.
 //  Copyright © 2016 Mail.ru. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
+
+NS_ASSUME_NONNULL_BEGIN
 
 @protocol MTRGInstreamAdPlayerDelegate <NSObject>
 
@@ -28,7 +30,7 @@
 
 @property(nonatomic, readonly) NSTimeInterval adVideoDuration;
 @property(nonatomic, readonly) NSTimeInterval adVideoTimeElapsed;
-@property(nonatomic, weak) id <MTRGInstreamAdPlayerDelegate> adPlayerDelegate;
+@property(nonatomic, weak, nullable) id <MTRGInstreamAdPlayerDelegate> adPlayerDelegate;
 @property(nonatomic, readonly) UIView *adPlayerView;
 @property(nonatomic) float volume;
 
@@ -41,3 +43,5 @@
 - (void)stopAdVideo;
 
 @end
+
+NS_ASSUME_NONNULL_END

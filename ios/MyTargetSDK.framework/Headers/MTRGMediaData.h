@@ -1,21 +1,22 @@
 //
-//  MTRGMediaData.h
-//  myTargetSDK 4.8.9
+//  myTargetSDK 5.0.4
 //
-//  Created by Timur Voloshin on 05.19.16.
-//  Copyright © 2016 Mail.ru. All rights reserved.
+// Created by Timur on 2/9/18.
+// Copyright (c) 2018 Mail.Ru Group. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
+NS_ASSUME_NONNULL_BEGIN
 
 @interface MTRGMediaData : NSObject
 
 @property(nonatomic, readonly, copy) NSString *url;
-@property(nonatomic) id data;
+@property(nonatomic, nullable) id data;
 @property(nonatomic) CGSize size;
 
 - (instancetype)initWithUrl:(NSString *)url;
 
 @end
+
+NS_ASSUME_NONNULL_END

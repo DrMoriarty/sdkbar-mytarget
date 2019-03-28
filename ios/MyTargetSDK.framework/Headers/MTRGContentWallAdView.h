@@ -1,14 +1,14 @@
 //
 //  MTRGContentWallAdView.h
-//  myTargetSDK 4.8.9
+//  myTargetSDK 5.0.4
 //
 //  Created by Anton Bulankin on 05.12.14.
 //  Copyright (c) 2014 Mail.ru Group. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
-#import <MyTargetSDK/MTRGNativePromoBanner.h>
-#import <MyTargetSDK/MTRGMediaAdView.h>
+#import "MTRGNativePromoBanner.h"
+#import "MTRGMediaAdView.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -26,6 +26,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property(nonatomic, readonly) MTRGMediaAdView *mediaAdView;
 @property(nonatomic) UIEdgeInsets imageMargins;
+
++ (instancetype)createWithBanner:(MTRGNativePromoBanner *)promoBanner;
 
 - (void)loadImages;
 

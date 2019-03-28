@@ -1,29 +1,51 @@
 //
-//  MTRGInstreamAudioAd.h
-//  myTargetSDK 4.8.9
+//  myTargetSDK 5.0.4
 //
-//  Created by Andrey Seredkin on 20.12.16.
-//  Copyright © 2016 Mail.ru Group. All rights reserved.
+// Created by Timur on 5/25/18.
+// Copyright (c) 2018 Mail.Ru Group. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
-#import <MyTargetSDK/MTRGInstreamAudioAdPlayer.h>
-#import <MyTargetSDK/MTRGInstreamAdCompanionBanner.h>
+#import "MTRGBaseAd.h"
+
+@class MTRGInstreamAudioAd;
+@class MTRGShareButtonData;
+@protocol MTRGInstreamAudioAdPlayer;
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class MTRGInstreamAudioAd;
-@class MTRGCustomParams;
+@interface MTRGInstreamAdCompanionBanner : NSObject
+
+@property(nonatomic, readonly) NSUInteger width;
+@property(nonatomic, readonly) NSUInteger height;
+@property(nonatomic, readonly) NSUInteger assetWidth;
+@property(nonatomic, readonly) NSUInteger assetHeight;
+@property(nonatomic, readonly) NSUInteger expandedWidth;
+@property(nonatomic, readonly) NSUInteger expandedHeight;
+
+@property(nonatomic, readonly, copy, nullable) NSString *staticResource;
+@property(nonatomic, readonly, copy, nullable) NSString *iframeResource;
+@property(nonatomic, readonly, copy, nullable) NSString *htmlResource;
+@property(nonatomic, readonly, copy, nullable) NSString *apiFramework;
+@property(nonatomic, readonly, copy, nullable) NSString *adSlotID;
+@property(nonatomic, readonly, copy, nullable) NSString *required;
+
+- (instancetype)init NS_UNAVAILABLE;
+
+@end
 
 @interface MTRGInstreamAudioAdBanner : NSObject
 
-@property(nonatomic) NSTimeInterval duration;
-@property(nonatomic) BOOL allowSeek;
-@property(nonatomic) BOOL allowSkip;
-@property(nonatomic) BOOL allowPause;
-@property(nonatomic) BOOL allowTrackChange;
-@property(nonatomic, copy, nullable) NSString *adText;
-@property(nonatomic, nullable) NSArray<MTRGInstreamAdCompanionBanner *> *companionBanners;
+@property(nonatomic, readonly) NSTimeInterval duration;
+@property(nonatomic, readonly) BOOL allowSeek;
+@property(nonatomic, readonly) BOOL allowSkip;
+@property(nonatomic, readonly) BOOL allowPause;
+@property(nonatomic, readonly) BOOL allowTrackChange;
+@property(nonatomic, readonly, copy, nullable) NSString *adText;
+@property(nonatomic, readonly) NSArray<MTRGInstreamAdCompanionBanner *> *companionBanners;
+@property(nonatomic, readonly) NSArray<MTRGShareButtonData *> *shareButtons;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 @end
 
@@ -53,20 +75,19 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-@interface MTRGInstreamAudioAd : NSObject
+@interface MTRGInstreamAudioAd : MTRGBaseAd
 
 @property(nonatomic, weak, nullable) id <MTRGInstreamAudioAdDelegate> delegate;
-@property(nonatomic, readonly, nullable) MTRGCustomParams *customParams;
 @property(nonatomic, nullable) id <MTRGInstreamAudioAdPlayer> player;
-@property(nonatomic) BOOL trackLocationEnabled;
-@property(nonatomic) float volume;
+@property(nonatomic, readonly, copy) NSArray<NSNumber *> *midpoints;
 @property(nonatomic) NSUInteger loadingTimeout;
+@property(nonatomic) float volume;
 
-+ (void)setDebugMode:(BOOL)enabled;
++ (instancetype)instreamAudioAdWithSlotId:(NSUInteger)slotId;
 
-+ (BOOL)isDebugMode;
+- (instancetype)init NS_UNAVAILABLE;
 
-- (nullable instancetype)initWithSlotId:(NSUInteger)slotId;
+- (instancetype)initWithSlotId:(NSUInteger)slotId;
 
 - (void)load;
 
@@ -92,13 +113,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)startMidrollWithPoint:(NSNumber *)point;
 
-- (void)configureMidpointsP:(NSArray<NSNumber *> *)midpointsP forAudioDuration:(NSTimeInterval)audioDuration;
+- (void)configureMidpointsP:(nullable NSArray<NSNumber *> *)midpointsP forAudioDuration:(NSTimeInterval)audioDuration;
 
-- (void)configureMidpoints:(NSArray<NSNumber *> *)midpoints forAudioDuration:(NSTimeInterval)audioDuration;
+- (void)configureMidpoints:(nullable NSArray<NSNumber *> *)midpoints forAudioDuration:(NSTimeInterval)audioDuration;
 
 - (void)configureMidpointsForAudioDuration:(NSTimeInterval)audioDuration;
-
-- (NSArray<NSNumber *> *)midpoints;
 
 @end
 

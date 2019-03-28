@@ -1,27 +1,25 @@
 //
 //  MTRGNativeAdLoader.h
-//  MyTargetSDK
+//  myTargetSDK 5.0.4
 //
-//  Created by Andrey Seredkin on 09.01.2018.
-//  Copyright © 2018 Mail.ru Group. All rights reserved.
+//  Created by Andrey Seredkin on 31.05.2018.
+//  Copyright © 2018 Mail.Ru Group. All rights reserved.
 //
 
-#import <MyTargetSDK/MTRGNativeAd.h>
-
-@class MTRGCustomParams;
+#import "MTRGNativeAd.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface MTRGNativeAdLoader : NSObject
+@interface MTRGNativeAdLoader : MTRGBaseAd
 
-@property(nonatomic, readonly, nullable) MTRGCustomParams *customParams;
-@property(nonatomic) MTRGAdChoicesPlacement adChoicesPlacement;
 @property(nonatomic) BOOL autoLoadImages;
 @property(nonatomic) BOOL autoLoadVideo;
-@property(nonatomic) BOOL trackLocationEnabled;
+@property(nonatomic) MTRGAdChoicesPlacement adChoicesPlacement;
 
 + (instancetype)loaderForCount:(NSUInteger)count slotId:(NSUInteger)slotId;
+
 - (instancetype)init NS_UNAVAILABLE;
+
 - (void)loadWithCompletionBlock:(void (^)(NSArray<MTRGNativeAd *> *nativeAds))completionBlock;
 
 @end

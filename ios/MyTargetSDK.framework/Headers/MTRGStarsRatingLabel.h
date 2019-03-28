@@ -1,9 +1,9 @@
 //
 //  MTRGStarsRatingLabel.h
-//  myTargetSDK 4.8.9
+//  myTargetSDK 5.0.4
 //
 //  Created by Andrey Seredkin on 27.01.17.
-//  Copyright © 2017 Mail.ru Group. All rights reserved.
+//  Copyright © 2017 Mail.Ru Group. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
@@ -15,7 +15,9 @@ IB_DESIGNABLE
 
 @property (nonatomic, nullable) IBInspectable NSNumber *rating;
 
-- (nullable instancetype)initWithRating:(NSNumber *)rating; //rating in interval 0...5
++ (instancetype)ratingLabelWithRating:(NSNumber *)rating;
+
+- (instancetype)initWithRating:(NSNumber *)rating;
 
 @end
 

@@ -1,6 +1,6 @@
 //
 //  MTRGMediaAdView.h
-//  myTargetSDK 4.8.9
+//  myTargetSDK 5.0.4
 //
 //  Created by Andrey Seredkin on 19.08.16.
 //  Copyright © 2016 Mail.ru. All rights reserved.
@@ -15,6 +15,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, readonly) UIImageView *imageView;
 @property(nonatomic, readonly) UIImageView *playImageView;
 @property(nonatomic, readonly) UIActivityIndicatorView *activityIndicatorView;
+
++ (instancetype)create;
 
 @end
 

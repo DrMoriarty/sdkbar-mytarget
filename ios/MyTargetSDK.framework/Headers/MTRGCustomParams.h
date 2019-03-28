@@ -1,6 +1,6 @@
 //
 //  MTRGCustomParams.h
-//  myTargetSDK 4.8.9
+//  myTargetSDK 5.0.4
 //
 //  Created by Anton Bulankin on 22.12.14.
 //  Copyright (c) 2014 Mail.ru Group. All rights reserved.
@@ -13,11 +13,10 @@ NS_ASSUME_NONNULL_BEGIN
 extern NSString *const kMTRGCustomParamsMediationKey;
 extern NSString *const kMTRGCustomParamsMediationAdmob;
 extern NSString *const kMTRGCustomParamsMediationMopub;
-extern NSString *const kMTRGCustomParamsHtmlSupportKey;
 
 typedef enum
 {
-	MTRGGenderUnspecified,
+	MTRGGenderUnspecified = -1,
 	MTRGGenderUnknown,
 	MTRGGenderMale,
 	MTRGGenderFemale
@@ -25,7 +24,7 @@ typedef enum
 
 @interface MTRGCustomParams : NSObject
 
-@property NSNumber *age;
+@property(nullable) NSNumber *age;
 @property(nonatomic) MTRGGender gender;
 @property(copy, nullable) NSString *language;
 
@@ -39,7 +38,9 @@ typedef enum
 @property(copy, nullable) NSString *mrgsUserId;
 @property(copy, nullable) NSString *mrgsDeviceId;
 
-- (NSDictionary *)asDictionary;
++ (instancetype)create;
+
+- (NSDictionary<NSString *, NSString *> *)asDictionary;
 
 - (void)setCustomParam:(nullable NSString *)param forKey:(NSString *)key;
 

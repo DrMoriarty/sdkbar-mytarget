@@ -1,14 +1,14 @@
 //
 //  MTRGPromoCardCollectionView.h
-//  myTargetSDK 4.8.9
+//  myTargetSDK 5.0.4
 //
 //  Created by Andrey Seredkin on 02.11.16.
 //  Copyright © 2016 Mail.ru Group. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
-#import <MyTargetSDK/MTRGNativePromoCard.h>
-#import <MyTargetSDK/MTRGPromoCardSliderProtocol.h>
+#import "MTRGNativePromoCard.h"
+#import "MTRGPromoCardSliderProtocol.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -16,6 +16,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, weak, nullable) id <MTRGPromoCardSliderDelegate> cardSliderDelegate;
 @property (nonatomic) BOOL isCardsClickable;
+
++ (instancetype)create;
 
 - (void)setCards:(NSArray<MTRGNativePromoCard *> *)cards;
 

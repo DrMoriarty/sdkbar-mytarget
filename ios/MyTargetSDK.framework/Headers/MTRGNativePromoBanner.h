@@ -1,36 +1,36 @@
 //
-//  MTRGNativePromoBanner.h
-//  myTargetSDK 4.8.9
+//  myTargetSDK 5.0.4
 //
-//  Created by Anton Bulankin on 17.11.14.
-//  Copyright (c) 2014 Mail.ru Group. All rights reserved.
+// Created by Timur on 2/12/18.
+// Copyright (c) 2018 Mail.Ru Group. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
-#import <MyTargetSDK/MTRGImageData.h>
 #import <MyTargetSDK/MTRGNavigationType.h>
-#import <MyTargetSDK/MTRGNativePromoCard.h>
+
+@class MTRGImageData;
+@class MTRGNativePromoCard;
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface MTRGNativePromoBanner : NSObject
 
-@property(nonatomic, copy, nullable) NSString *advertisingLabel;
-@property(nonatomic, copy, nullable) NSString *ageRestrictions;
-@property(nonatomic, copy, nullable) NSString *title;
-@property(nonatomic, copy, nullable) NSString *descriptionText;
-@property(nonatomic, copy, nullable) NSString *disclaimer;
-@property(nonatomic, copy, nullable) NSString *category;
-@property(nonatomic, copy, nullable) NSString *subcategory;
-@property(nonatomic, copy, nullable) NSString *domain;
-@property(nonatomic, copy, nullable) NSString *ctaText;
-@property(nonatomic, nullable) NSNumber *rating;
-@property(nonatomic) NSUInteger votes;
-@property(nonatomic) MTRGNavigationType navigationType;
-@property(nonatomic, nullable) MTRGImageData *icon;
-@property(nonatomic, nullable) MTRGImageData *image;
-@property(nonatomic, nullable) NSArray<MTRGNativePromoCard *> *cards;
-@property(nonatomic) BOOL hasVideo;
+@property(nonatomic, readonly, copy, nullable) NSString *advertisingLabel;
+@property(nonatomic, readonly, copy, nullable) NSString *ageRestrictions;
+@property(nonatomic, readonly, copy, nullable) NSString *title;
+@property(nonatomic, readonly, copy, nullable) NSString *descriptionText;
+@property(nonatomic, readonly, copy, nullable) NSString *disclaimer;
+@property(nonatomic, readonly, copy, nullable) NSString *category;
+@property(nonatomic, readonly, copy, nullable) NSString *subcategory;
+@property(nonatomic, readonly, copy, nullable) NSString *domain;
+@property(nonatomic, readonly, copy, nullable) NSString *ctaText;
+@property(nonatomic, readonly, nullable) NSNumber *rating;
+@property(nonatomic, readonly) NSUInteger votes;
+@property(nonatomic, readonly) MTRGNavigationType navigationType;
+@property(nonatomic, readonly, nullable) MTRGImageData *icon;
+@property(nonatomic, readonly, nullable) MTRGImageData *image;
+@property(nonatomic, readonly) NSArray<MTRGNativePromoCard *> *cards;
+@property(nonatomic, readonly) BOOL hasVideo;
 
 @end
 

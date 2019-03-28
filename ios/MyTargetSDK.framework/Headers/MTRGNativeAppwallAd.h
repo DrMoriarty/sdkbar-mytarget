@@ -1,66 +1,72 @@
 //
-//  MTRGNativeAppwallAd.h
-//  myTargetSDK 4.8.9
+//  myTargetSDK 5.0.4
 //
-//  Created by Anton Bulankin on 13.01.15.
-//  Copyright (c) 2015 Mail.ru Group. All rights reserved.
+// Created by Timur on 4/12/18.
+// Copyright (c) 2018 Mail.Ru Group. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
+#import "MTRGBaseAd.h"
 
-#import <MyTargetSDK/MTRGCustomParams.h>
-#import <MyTargetSDK/MTRGNativeAppwallBanner.h>
-#import <MyTargetSDK/MTRGAppwallAdView.h>
+@class MTRGNativeAppwallAd;
+@class MTRGImageData;
+@class MTRGNativeAppwallBanner;
+@class MTRGAppwallAdView;
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class MTRGNativeAppwallAd;
-
 @protocol MTRGNativeAppwallAdDelegate <NSObject>
 
-- (void)onLoadWithAppwallBanners:(NSArray *)appwallBanners appwallAd:(MTRGNativeAppwallAd *)appwallAd;
+- (void)onLoadWithBanners:(NSArray<MTRGNativeAppwallBanner *> *)banners appwallAd:(MTRGNativeAppwallAd *)appwallAd;
 
 - (void)onNoAdWithReason:(NSString *)reason appwallAd:(MTRGNativeAppwallAd *)appwallAd;
 
 @optional
 
-- (void)onAdClickWithNativeAppwallAd:(MTRGNativeAppwallAd *)appwallAd appwallBanner:(MTRGNativeAppwallBanner *)appwallBanner;
+- (void)onAdClickWithNativeAppwallAd:(MTRGNativeAppwallAd *)appwallAd banner:(MTRGNativeAppwallBanner *)banner;
+
+- (void)onShowModalWithNativeAppwallAd:(MTRGNativeAppwallAd *)appwallAd;
+
+- (void)onDismissModalWithNativeAppwallAd:(MTRGNativeAppwallAd *)appwallAd;
+
+- (void)onLeaveApplicationWithNativeAppwallAd:(MTRGNativeAppwallAd *)appwallAd;
 
 @end
 
-
-@interface MTRGNativeAppwallAd : NSObject
+@interface MTRGNativeAppwallAd : MTRGBaseAd
 
 @property(nonatomic, weak, nullable) id <MTRGNativeAppwallAdDelegate> delegate;
-@property(nonatomic, copy, nullable) NSString *appWallTitle;
-@property(nonatomic, copy, nullable) NSString *closeButtonTitle;
-@property(nonatomic) NSUInteger cachePeriodInSec;
-@property(nonatomic, readonly, nullable) MTRGCustomParams *customParams;
-@property(nonatomic, readonly, nullable) NSArray *banners;
+@property(nonatomic, readonly) NSArray<MTRGNativeAppwallBanner *> *banners;
+@property(nonatomic, copy) NSString *title;
+@property(nonatomic, copy) NSString *closeButtonTitle;
+@property(nonatomic) NSTimeInterval cachePeriodInSec;
 @property(nonatomic) BOOL autoLoadImages;
-@property(nonatomic) BOOL trackLocationEnabled;
-
-+ (void)setDebugMode:(BOOL)enabled;
-
-+ (BOOL)isDebugMode;
 
 + (void)loadImage:(MTRGImageData *)imageData toView:(UIImageView *)imageView;
 
-- (nullable instancetype)initWithSlotId:(NSUInteger)slotId;
++ (instancetype)nativeAppwallAdWithSlotId:(NSUInteger)slotId;
+
+- (instancetype)init NS_UNAVAILABLE;
+
+- (instancetype)initWithSlotId:(NSUInteger)slotId;
 
 - (void)load;
 
-- (void)showWithController:(UIViewController *)controller onComplete:(nullable void (^)(void))onComplete onError:(nullable void (^)(NSError *error))onError;
-
-- (void)registerAppWallAdView:(MTRGAppwallAdView *)appWallAdView withController:(UIViewController *)controller;
+- (void)showWithController:(UIViewController *)controller;
 
 - (void)close;
 
+- (void)registerAppwallAdView:(MTRGAppwallAdView *)appwallAdView withController:(UIViewController *)controller;
+
+- (void)unregisterAppwallAdView;
+
 - (BOOL)hasNotifications;
 
-- (void)handleShow:(MTRGNativeAppwallBanner *)appWallBanner;
+- (void)handleBannerShow:(MTRGNativeAppwallBanner *)banner;
 
-- (void)handleClick:(MTRGNativeAppwallBanner *)appWallBanner withController:(UIViewController *)controller;
+- (void)handleBannersShow:(NSArray<MTRGNativeAppwallBanner *> *)banners;
+
+- (void)handleBannerClick:(MTRGNativeAppwallBanner *)banner withController:(UIViewController *)controller;
 
 @end
 

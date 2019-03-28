@@ -147,7 +147,6 @@ public class MyTargetPlugin {
                 public void run() {
                     Log.i(TAG, "Show new banner");
                     layout.addView(bannerView, adViewLayoutParams);
-                    bannerView.start();
                 }
             });
         return true;

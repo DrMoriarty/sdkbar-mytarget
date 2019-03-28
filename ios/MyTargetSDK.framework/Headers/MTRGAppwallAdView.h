@@ -1,13 +1,13 @@
 //
-//  MTRGAppwallAdView.h
-//  myTargetSDK 4.8.9
+//  myTargetSDK 5.0.4
 //
-//  Created by Anton Bulankin on 16.01.15.
-//  Copyright (c) 2015 Mail.ru Group. All rights reserved.
+// Created by Timur on 4/12/18.
+// Copyright (c) 2018 Mail.Ru Group. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
-#import <MyTargetSDK/MTRGNativeAppwallBanner.h>
+
+@class MTRGNativeAppwallBanner;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -15,7 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)appwallAdViewOnClickWithBanner:(MTRGNativeAppwallBanner *)banner;
 
-- (void)appwallAdViewOnShowWithBanner:(MTRGNativeAppwallBanner *)banner;
+- (void)appwallAdViewOnSlideToBanners:(NSArray<MTRGNativeAppwallBanner *> *)banners;
 
 @end
 
@@ -23,7 +23,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property(nonatomic, weak, nullable) id <MTRGAppwallAdViewDelegate> delegate;
 
-- (nullable instancetype)initWithBanners:(nullable NSArray *)banners;
++ (instancetype)appwallAdViewWithBanners:(NSArray<MTRGNativeAppwallBanner *> *)banners;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 @end
 

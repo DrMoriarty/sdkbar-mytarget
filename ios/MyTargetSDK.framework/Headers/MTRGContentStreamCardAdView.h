@@ -1,14 +1,14 @@
 //
 //  MTRGContentStreamCardAdView.h
-//  myTargetSDK 4.8.9
+//  myTargetSDK 5.0.4
 //
 //  Created by Andrey Seredkin on 20.10.16.
 //  Copyright © 2016 Mail.ru. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
-#import <MyTargetSDK/MTRGPromoCardViewProtocol.h>
-#import <MyTargetSDK/MTRGMediaAdView.h>
+#import "MTRGPromoCardViewProtocol.h"
+#import "MTRGMediaAdView.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -18,6 +18,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, readonly) UILabel *descriptionLabel;
 @property(nonatomic, readonly) UILabel *ctaButtonLabel;
 @property(nonatomic, readonly) MTRGMediaAdView *mediaAdView;
+
++ (instancetype)create;
 
 - (CGFloat)heightWithCardWidth:(CGFloat)width;
 

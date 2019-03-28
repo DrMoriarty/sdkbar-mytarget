@@ -1,14 +1,14 @@
 //
 //  MTRGAppwallBannerAdView.h
-//  myTargetSDK 4.8.9
+//  myTargetSDK 5.0.4
 //
 //  Created by Anton Bulankin on 15.01.15.
 //  Copyright (c) 2015 Mail.ru Group. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
-#import <MyTargetSDK/MTRGNativeAppwallBanner.h>
+
+@class MTRGNativeAppwallBanner;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -16,20 +16,21 @@ NS_ASSUME_NONNULL_BEGIN
 
 @protocol MTRGAppwallBannerAdViewDelegate <NSObject>
 
-- (void)appWallBannerAdViewOnClickWithView:(MTRGAppwallBannerAdView *)bannerAdView;
+- (void)appwallBannerAdViewOnClickWithView:(MTRGAppwallBannerAdView *)bannerAdView;
 
-- (void)appWallBannerAdViewOnCancelSelectWithView:(MTRGAppwallBannerAdView *)bannerAdView;
+- (void)appwallBannerAdViewOnCancelSelectWithView:(MTRGAppwallBannerAdView *)bannerAdView;
 
 @optional
 
-- (BOOL)appWallBannerAdViewAllowStartSelect:(MTRGAppwallBannerAdView *)bannerAdView;
+- (BOOL)appwallBannerAdViewAllowStartSelect:(MTRGAppwallBannerAdView *)bannerAdView;
 
 @end
 
 
 @interface MTRGAppwallBannerAdView : UIView
 
-@property(nonatomic, nullable) MTRGNativeAppwallBanner *appWallBanner;
+@property(nonatomic, weak, nullable) id <MTRGAppwallBannerAdViewDelegate> delegate;
+@property(nonatomic, nullable) MTRGNativeAppwallBanner *appwallBanner;
 
 @property(nonatomic) UIEdgeInsets titleMargins;
 @property(nonatomic) UIEdgeInsets descriptionMargins;
@@ -77,9 +78,15 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic) BOOL showCoins;
 @property(nonatomic) BOOL showCrossNotifIcon;
 
-- (nullable instancetype)initWithDelegate:(nullable id <MTRGAppwallBannerAdViewDelegate>)delegate;
-- (void)setAppWallBanner:(MTRGNativeAppwallBanner *)appWallBanner;
++ (instancetype)create;
+
+- (instancetype)init NS_UNAVAILABLE;
+
+- (void)setAppwallBanner:(MTRGNativeAppwallBanner *)appwallBanner;
+
 - (void)setFixedWidth:(CGFloat)width;
+
+- (void)removeNotification;
 
 @end
 
